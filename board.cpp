@@ -46,6 +46,7 @@ void board::clear()
 
 void board::resetCell(int row, int col){
 	value[row][col] = Blank;
+    updateConflicts();
 }
 
 bool board::isSolved(){
@@ -217,7 +218,7 @@ int main()
 	ifstream fin;
 
 	// Read the sample grid from the file.
-	string fileName = "sudoku.txt";
+	string fileName = "sudoku2.txt";
 
 	fin.open(fileName.c_str());
 	if (!fin)
@@ -244,4 +245,6 @@ int main()
 		system("pause");
 		exit(1);
 	}
+
+    return 0;
 }
