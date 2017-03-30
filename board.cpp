@@ -5,6 +5,7 @@
 #include "board.h"
 #include <list>
 #include <fstream>
+#include <cstdlib>
 
 using namespace std;
 
@@ -41,6 +42,21 @@ void board::clear()
 		{
 			value[i][j] = Blank;
 		}
+}
+
+void board::resetCell(int row, int col){
+	value[row][col] = Blank;
+}
+
+bool board::isSolved(){
+	for(int i = 0; i < BoardSize; i++){
+		for(int j = 0; j < BoardSize; j++){
+			if(this->isBlank(i,j)){
+				return false; //found empty cell
+			}
+		}
+	}
+	return true; //no empty cells found
 }
 
 void board::initialize(ifstream &fin)

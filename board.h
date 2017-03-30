@@ -18,6 +18,8 @@ public:
 	bool isBlank(int, int);
 	ValueType getCell(int, int);
 	void setCell(int, int, int);
+	void resetCell(int, int);
+	bool isSolved();
 
 private:
 
