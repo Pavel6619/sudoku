@@ -6,6 +6,7 @@
 #include <list>
 #include <fstream>
 #include <cstdlib>
+#include <string>
 
 using namespace std;
 
@@ -216,9 +217,37 @@ void board::print()
 int main()
 {
 	ifstream fin;
+    string choice;
+	int c;
+    string fileName;
 
-	// Read the sample grid from the file.
-	string fileName = "sudoku2.txt";
+    cout << "Sudoku board 1, 2, or 3?";
+
+    do{
+		cin >> choice;
+		if((choice.find_first_not_of( "0123456789" ) == string::npos)){
+			c = atoi(choice.c_str());
+			switch(c) {
+				case 1:
+					fileName = "sudoku1.txt";
+					break;
+				case 2:
+					fileName = "sudoku2.txt";
+					break;
+				case 3:
+					fileName = "sudoku3.txt";
+					break;
+				default:
+					cout << endl << "enter a number between 1 and 3";
+			}
+		}
+		else{
+			cin.clear();
+			c = 4;
+			cout << endl << "enter a number between 1 and 3";
+		}
+
+    }while(c < 1 || c > 3);
 
 	fin.open(fileName.c_str());
 	if (!fin)
