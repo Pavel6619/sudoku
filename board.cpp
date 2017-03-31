@@ -46,14 +46,13 @@ void board::clear()
 }
 
 void board::resetCell(int row, int col){
-	value[row][col] = Blank;
-    updateConflicts();
+	setCell(row, col, Blank);
 }
 
 bool board::isSolved(){
-	for(int i = 0; i < BoardSize; i++){
-		for(int j = 0; j < BoardSize; j++){
-			if(this->isBlank(i,j)){
+	for(int i = 1; i <= BoardSize; i++){
+		for(int j = 1; j <= BoardSize; j++){
+			if(isBlank(i,j)){
 				return false; //found empty cell
 			}
 		}
@@ -264,7 +263,16 @@ int main()
 		{
 			b1.initialize(fin);
 			b1.print();
+			cout << "Conflicts: " << endl;
 			b1.printConflicts();
+			if (b1.isSolved())
+			{
+				cout << "Solved" << endl;
+			}
+			else
+			{
+				cout << "Not Solved" << endl;
+			}
 		}
 		system("pause");
 	}
