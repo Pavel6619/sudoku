@@ -20,6 +20,9 @@ public:
 	void setCell(int, int, int);
 	void resetCell(int, int);
 	bool isSolved();
+    bool solve();
+    vector<int> getPossibleDigits(int, int);
+    void solveCertainDigits();
 
 private:
 

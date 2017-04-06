@@ -104,6 +104,32 @@ void board::updateConflicts()
 		}
 }
 
+vector<int> board::getPossibleDigits(int r, int c){
+    vector<int> options = {};
+    if(isBlank(r,c)){
+        for(int i = 1; i <= 9; i++){
+            if(!row_conf[r][i] && !col_conf[c][i] && !square_conf[squareNumber(r,c)][i]){
+                options.push_back(i); //add digits that do not have any conflicts
+            }
+        }
+    }
+    return options;
+}
+
+void board::solveCertainDigits() {
+    bool changesMade = true;
+        changesMade = false;
+        for(int i = 1; i <= BoardSize; i++){
+            for(int j = 1; j <= BoardSize; j++){
+                vector<int> options= getPossibleDigits(i,j);
+                if(options.size() == 1){
+                    value[i][j] = options.at(0);
+                    changesMade = true;
+                }
+            }
+        }
+}
+
 void board::printConflicts()
 {
 	for (int i = 1; i <= BoardSize; i++)
