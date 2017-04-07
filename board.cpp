@@ -310,11 +310,10 @@ bool solve(board& b)
 int main()
 {
 	ifstream fin;
-    string choice;
-	int c;
     string fileName;
+    int numCalls[3];
 
-    cout << "Sudoku board 1, 2, or 3?";
+    /*cout << "Sudoku board 1, 2, or 3?";
 
     do{
 		cin >> choice;
@@ -340,35 +339,54 @@ int main()
 			cout << endl << "enter a number between 1 and 3";
 		}
 
-    }while(c < 1 || c > 3);
+    }while(c < 1 || c > 3);*/
 
-	fin.open(fileName.c_str());
-	if (!fin)
-	{
-		cerr << "Cannot open " << fileName << endl;
-		exit(1);
-	}
+    for(int c = 1; c <= 3; c++){
+        switch(c) {
+            case 1:
+                fileName = "sudoku1.txt";
+                break;
+            case 2:
+                fileName = "sudoku2.txt";
+                break;
+            case 3:
+                fileName = "sudoku3.txt";
+                break;
+        }
+        fin.open(fileName.c_str());
+        if (!fin)
+        {
+            cerr << "Cannot open " << fileName << endl;
+            exit(1);
+        }
 
-	try
-	{
-		board b1(SquareSize);
-		int i = 1, j = 1;
-		while (fin && fin.peek() != 'Z')
-		{
-			b1.initialize(fin);
-			b1.print();
-			system("pause");
-			solve(b1);
-		}
-		cout << "Total recursive calls: " << b1.getRecursiveCalls() << endl;
-		system("pause");
-	}
-	catch (indexRangeError &ex)
-	{
-		cout << ex.what() << endl;
-		system("pause");
-		exit(1);
-	}
+        try
+        {
+            board b1(SquareSize);
+            int i = 1, j = 1;
+            while (fin && fin.peek() != 'Z')
+            {
+                b1.initialize(fin);
+                b1.print();
+                system("pause");
+                solve(b1);
+            }
+            numCalls[c-1] = b1.getRecursiveCalls();
+            cout << "Total recursive calls: " << b1.getRecursiveCalls() << endl;
+            system("pause");
+        }
+        catch (indexRangeError &ex)
+        {
+            cout << ex.what() << endl;
+            system("pause");
+            exit(1);
+        }
+
+        fin.close();
+    }
+
+    int averageNumCalls = (numCalls[0] + numCalls[1] + numCalls[2]) / 3;
+    cout << endl << "Average number of recursive calls: " << averageNumCalls;
 
     return 0;
 }
