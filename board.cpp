@@ -368,12 +368,10 @@ int main()
             {
                 b1.initialize(fin);
                 b1.print();
-                system("pause");
                 solve(b1);
             }
             numCalls[c-1] = b1.getRecursiveCalls();
             cout << "Total recursive calls: " << b1.getRecursiveCalls() << endl;
-            system("pause");
         }
         catch (indexRangeError &ex)
         {
@@ -386,7 +384,7 @@ int main()
     }
 
     int averageNumCalls = (numCalls[0] + numCalls[1] + numCalls[2]) / 3;
-    cout << endl << "Average number of recursive calls: " << averageNumCalls;
-
+    cout << endl << "Average number of recursive calls: " << averageNumCalls << endl;
+	system("pause");
     return 0;
 }
