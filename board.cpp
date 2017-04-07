@@ -371,7 +371,6 @@ int main()
                 system("pause");
                 solve(b1);
             }
-
             numCalls[c-1] = b1.getRecursiveCalls();
             cout << "Total recursive calls: " << b1.getRecursiveCalls() << endl;
             system("pause");
